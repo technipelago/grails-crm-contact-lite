@@ -1,4 +1,4 @@
-# Grails CRM - Simple Contact Management Plugin
+# Grails CRM - Contact Management User Interface Plugin
 
 CRM = [Customer Relationship Management](http://en.wikipedia.org/wiki/Customer_relationship_management)
 
@@ -11,5 +11,6 @@ With CRM we mean features like:
 - Project Management
 
 
-## Contact Management Plugin "Lite"
-This plugin provides a simplified contact management compared to the crm-contact plugin. This plugin stores both people and companies in the same CrmContact domain class. The crm-contact plugin have both a CrmPerson and a CrmCompany domain and support for multiple relations between contacts.
+## Contact Management User Interface for Grails CRM
+This plugin provides a Twitter Bootstrap user interface for contact management in Grails CRM.
+It depends on the **crm-contact** plugin for services and persistence.
