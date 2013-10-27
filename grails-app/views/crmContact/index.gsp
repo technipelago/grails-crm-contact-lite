@@ -36,6 +36,21 @@
             preventDefaultReturn: true,
             selectFirst: true
         });
+        $('input[name="company"]').on('change', function(ev) {
+            $("#name").focus();
+        });
+        $('input[name="person"]').on('change', function(ev) {
+            if($(this).is(':checked')) {
+                $("#parentField").show();
+            } else {
+                $("#parent").val('');
+                $("#parentField").hide();
+            }
+            $("#name").focus();
+        });
+        if($("#parent").val() || $('input[name="person"]').is(':checked')) {
+            $("#parentField").show();
+        }
     });
     </r:script>
 </head>
@@ -78,9 +93,15 @@
                     <f:field property="name" label="crmContact.name.label">
                         <g:textField name="name" value="${cmd?.name}" autofocus="" class="span12"/>
                     </f:field>
-                    <f:field property="parent" label="crmContact.parent.label">
-                        <g:textField name="parent" value="${cmd?.parent}" class="span12"/>
-                    </f:field>
+                    <div id="parentField" class="control-group hide">
+                        <label class="control-label">
+                            <g:message code="crmContact.parent.label"/>
+                        </label>
+
+                        <div class="controls">
+                            <g:textField name="parent" value="${cmd?.parent}" class="span12"/>
+                        </div>
+                    </div>
                     <f:field property="title" label="crmContact.title.label" input-class="span12"/>
                     <f:field property="email" label="crmContact.email.label" input-class="span12"/>
                     <f:field property="telephone" label="crmContact.telephone.label" input-class="span12"/>
@@ -113,7 +134,8 @@
                     <f:field property="number" label="crmContact.number.label" input-class="span10"/>
                     <f:field property="number2" label="crmContact.number2.label" input-class="span10"/>
                     <f:field property="ssn" label="crmContact.ssn.label" input-class="span10"/>
-                    <g:render template="birthdates" model="${[crmContact: cmd, placeholder: true]}"/>
+                    <g:render template="birthdates"
+                              model="${[crmContact: cmd, placeholder: true]}"/>
 
                     <f:field property="category" label="crmContact.category.label">
                         <g:textField name="category" value="${cmd.category}" class="span10" autocomplete="off"/>
