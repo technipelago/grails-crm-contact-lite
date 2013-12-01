@@ -6,7 +6,7 @@ grails.project.repos.default = "crm"
 grails.project.dependency.resolution = {
     inherits("global") {}
     log "warn"
-    legacyResolve false
+    legacyResolve true
     repositories {
         grailsHome()
         mavenRepo "http://labs.technipelago.se/repo/plugins-releases-local/"
@@ -17,8 +17,10 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
-        compile "org.xhtmlrenderer:core-renderer:R8"
-        compile "com.lowagie:itext:2.1.0"
+        // Without xhtmlrenderer and itext we get unresolved dependencies in the Jenkins build!?
+        // I tried 'legacyResolve true' but it did not help.
+        //compile "org.xhtmlrenderer:core-renderer:R8"
+        //compile "com.lowagie:itext:2.1.0"
     }
 
     plugins {
