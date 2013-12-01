@@ -16,6 +16,7 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
+        compile 'com.lowagie:itext:2.1.0'
     }
 
     plugins {
@@ -30,15 +31,17 @@ grails.project.dependency.resolution = {
             export = false
             exclude "spock-grails-support"
         }
-        test(":codenarc:0.18.1") { export = false }
-        test(":code-coverage:1.2.6") { export = false }
+        test(":codenarc:0.19") { export = false }
+        test(":code-coverage:1.2.7") { export = false }
 
         runtime(":avatar:0.6.3") {
             excludes 'xercesImpl', 'xml-apis'
         }
 
         runtime(":qrcode:0.4")
-
+        compile(":rendering:0.4.4") {
+            excludes 'itext'
+        }
         compile ":selection:latest.integration"
         compile ":sequence-generator:latest.integration"
         runtime ":selection-repository:latest.integration"
@@ -58,12 +61,12 @@ grails.project.dependency.resolution = {
 codenarc {
     reports = {
         CrmXmlReport('xml') {
-            outputFile = 'target/test-reports/CodeNarcReport.xml'
-            title = 'Grails CRM CodeNarc Report'
+            outputFile = 'target/CodeNarcReport.xml'
+            title = 'GR8 CRM CodeNarc Report'
         }
         CrmHtmlReport('html') {
-            outputFile = 'target/test-reports/CodeNarcReport.html'
-            title = 'Grails CRM CodeNarc Report'
+            outputFile = 'target/CodeNarcReport.html'
+            title = 'GR8 CRM CodeNarc Report'
 
         }
     }
@@ -83,4 +86,3 @@ codenarc {
 coverage {
     exclusions = ['**/radar/**']
 }
-
