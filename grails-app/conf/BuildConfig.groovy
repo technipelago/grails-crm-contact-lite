@@ -16,7 +16,6 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
-        compile 'com.lowagie:itext:2.1.0'
     }
 
     plugins {
@@ -39,9 +38,7 @@ grails.project.dependency.resolution = {
         }
 
         runtime(":qrcode:0.4")
-        compile(":rendering:0.4.4") {
-            excludes 'itext'
-        }
+        compile(":rendering:0.4.4")
         compile ":selection:latest.integration"
         compile ":sequence-generator:latest.integration"
         runtime ":selection-repository:latest.integration"
