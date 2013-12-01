@@ -6,7 +6,7 @@ grails.project.repos.default = "crm"
 grails.project.dependency.resolution = {
     inherits("global") {}
     log "warn"
-    legacyResolve false
+    legacyResolve true // Need true here to resolve xhtmlrenderer in Jenkins CI.
     repositories {
         grailsHome()
         mavenRepo "http://labs.technipelago.se/repo/plugins-releases-local/"
