@@ -235,6 +235,7 @@ class CrmContactController {
                 return [user: user, crmContact: crmContact, parentContact: parentContact,
                         addressTypes: addressTypes, userList: userList, referer: params.referer]
             case 'POST':
+                def createPerson = (crmContact.firstName || crmContact.lastName)
                 def problem = null
                 CrmContact.withTransaction { tx ->
                     if (params.parentName && !parentContact) {
@@ -247,6 +248,10 @@ class CrmContactController {
                             if (a.id) {
                                 a.delete()
                             }
+                        }
+                        // If we don't create a person, put the description on the company.
+                        if(! createPerson) {
+                            parentContact.description = params.description
                         }
                         if (parentContact.save()) {
                             crmContact.parent = parentContact
@@ -268,7 +273,7 @@ class CrmContactController {
                         crmContact.username = parentContact.username
                     }
 
-                    if (crmContact.firstName || crmContact.lastName) {
+                    if (createPerson) {
                         if (problem) {
                             crmContact.validate()
                         } else if (!crmContact.save()) {
