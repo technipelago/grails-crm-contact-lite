@@ -10,18 +10,17 @@
 
 <crm:header title="crmContact.create.title" args="[entityName]"/>
 
-<h2>Vilken typ av kontakt vill du registrera?</h2>
+<h2><g:message code="crmContact.create.type.message" args="[entityName]"/></h2>
 
 <div class="row-fluid">
     <div class="span6">
         <dl>
-            <dt>Företag</dt>
-            <dd>Företag och organisationer kan ha kontaktpersoner knutna till sig, men även enskilda firmor bör registreras som företag.
-            I denna bild kan du inte registrera uppgifter om någon person, endast företagsuppgifter.</dd>
-            <dt>Kontaktperson</dt>
-            <dd>En kontaktperson är knuten till ett företag/organisation. I denna bild får du möjlighet att registrera både företaget om det inte redan är registrerat, och en kontaktperson.</dd>
-            <dt>Privatperson</dt>
-            <dd>En privatperson är en individ som inte har någon koppling till ett företag. I denna bild kan du inte registrera några företagsuppgifter, endast uppgifter om en person.</dd>
+            <dt><g:message code="crmCompany.label" default="Company"/></dt>
+            <dd><g:message code="crmContact.select.create.company.message" default="A company is an organisation that can (but are not forced to) have associated contacts/employees"/></dd>
+            <dt><g:message code="crmContact.label" default="Contact"/></dt>
+            <dd><g:message code="crmContact.select.create.contact.message" default="A contact is employed by or associated in som other way with a company"/></dd>
+            <dt><g:message code="crmIndividual.label" default="Individual"/></dt>
+            <dd><g:message code="crmContact.select.create.person.message" default="An individual is a person not associated with a company"/></dd>
         </dl>
     </div>
 

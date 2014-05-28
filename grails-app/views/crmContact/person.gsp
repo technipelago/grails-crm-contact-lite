@@ -57,7 +57,7 @@
 
     <div class="tabbable">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#main" data-toggle="tab">Namn &amp; telefon</a></li>
+            <li class="active"><a href="#main" data-toggle="tab"><g:message code="crmContact.tab.main.label"/></a></li>
             <g:each in="${addressTypes}" var="addressType" status="i">
                 <li>
                     <a href="#${addressType.param ?: 'a' + addressType.id}"
@@ -133,9 +133,9 @@
                                       model="${[bean: myAddr ?: new CrmContactAddress(type: addressType, contact: crmContact), row: i]}"/>
 
                             <a class="show-visible-extra hidden-extra"
-                               href="javascript:void(0)">+ Visa fler fält</a>
+                               href="javascript:void(0)"><g:message code="crmContact.fields.show.more" default="Show more fields"/></a>
                             <a class="hide-visible-extra visible-extra hide"
-                               href="javascript:void(0)">- Visa färre fält</a>
+                               href="javascript:void(0)"><g:message code="crmContact.fields.show.less" default="Show less fields"/></a>
                         </div>
 
                         <g:if test="${parentAddr}">
