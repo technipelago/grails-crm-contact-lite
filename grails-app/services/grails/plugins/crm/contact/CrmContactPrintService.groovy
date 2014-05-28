@@ -12,8 +12,13 @@ class CrmContactPrintService {
 
     def grailsApplication
     def crmSecurityService
+    def crmThemeService
     def selectionService
     def pdfRenderingService
+
+    private File getLogoFile(Long tenantId) {
+        crmThemeService.getLogoFile(tenantId, 'large') ?: crmThemeService.getLogoFile(tenantId, 'medium')
+    }
 
     @Listener(namespace = "crmContact", topic = "print")
     def print(params) {
@@ -43,11 +48,7 @@ class CrmContactPrintService {
                 def result = selectionService.select(uri, params)
 
                 if (result) {
-                    def logoPath = crmSecurityService.getTenantInfo(params.tenant)?.options?.logo
-                    if (!logoPath) {
-                        logoPath = grailsApplication.config.crm.theme.logo.default ?: "/images/grails_logo.png"
-                    }
-                    def logo = new File(grailsApplication.parentContext.servletContext.getRealPath(logoPath))
+                    def logo = getLogoFile(params.tenant)
 
                     tempFile = File.createTempFile("crm", ".pdf")
                     tempFile.deleteOnExit()
