@@ -1,3 +1,6 @@
+grails.project.class.dir = "target/classes"
+grails.project.test.class.dir = "target/test-classes"
+grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target"
 grails.project.target.level = 1.6
 
@@ -34,7 +37,7 @@ grails.project.dependency.resolution = {
             export = false
             exclude "spock-grails-support"
         }
-        test(":codenarc:0.19") { export = false }
+        test(":codenarc:0.21") { export = false }
         test(":code-coverage:1.2.7") { export = false }
 
         runtime(":avatar:0.6.3") {
