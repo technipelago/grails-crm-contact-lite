@@ -5,6 +5,11 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'crmContact.label', default: 'CrmContact')}"/>
     <title><g:message code="crmContact.list.title" args="[entityName]"/></title>
+    <style type="text/css">
+        table.crm-list td:first-child, th:first-child {
+            width: 16px;
+        }
+    </style>
 </head>
 
 <body>
@@ -12,10 +17,10 @@
 <crm:header title="crmContact.list.title" subtitle="crmContact.totalCount.label"
             args="[entityName, crmContactTotal]"/>
 
-<table class="table table-striped">
+<table class="table table-striped crm-list">
     <thead>
     <tr>
-
+        <th></th>
         <crm:sortableColumn property="name"
                             title="${message(code: 'crmContact.name.label', default: 'Name')}"/>
 
@@ -36,6 +41,11 @@
         <g:set var="parentContact" value="${crmContact.parent}"/>
         <g:set var="preferredPhone" value="${crmContact.preferredPhone}"/>
         <tr>
+            <td>
+                <g:if test="${crmContact.person}">
+                    <i class="icon-user"></i>
+                </g:if>
+            </td>
             <td>
                 <select:link action="show" id="${crmContact.id}" selection="${selection}">
                     ${fieldValue(bean: crmContact, field: "name")}<g:if
