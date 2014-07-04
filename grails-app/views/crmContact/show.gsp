@@ -266,7 +266,13 @@
             <g:message code="crmContact.button.view.label" default="View"/>
             <span class="caret"></span></button>
         <ul class="dropdown-menu">
-
+            <g:if test="${selection}">
+                <li>
+                    <select:link action="list" selection="${selection}" params="${[view:'list']}">
+                        <g:message code="crmContact.show.result.label" default="Show result in list view"/>
+                    </select:link>
+                </li>
+            </g:if>
             <crm:hasPermission permission="crmContact:createFavorite">
                 <crm:user>
                     <g:if test="${crmContact.isUserTagged('favorite', username)}">
