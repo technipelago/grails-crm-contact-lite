@@ -40,25 +40,25 @@ grails.project.dependency.resolution = {
         test(":codenarc:0.21") { export = false }
         test(":code-coverage:1.2.7") { export = false }
 
-        runtime(":avatar:0.6.3") {
+        compile(":avatar:0.6.3") {
             excludes 'xercesImpl', 'xml-apis'
         }
 
-        runtime(":qrcode:0.4")
+        compile(":qrcode:0.6")
         compile(":rendering:0.4.4")
-        compile ":selection:latest.integration"
-        compile ":sequence-generator:latest.integration"
-        runtime ":selection-repository:latest.integration"
-        runtime ":recent-domain:latest.integration"
-        runtime ":decorator:latest.integration"
-        runtime ":user-tag:latest.integration"
+        compile ":selection:0.9.6"
+        compile ":sequence-generator:1.0"
+        compile ":selection-repository:0.9.3"
+        compile ":recent-domain:latest.integration"
+        compile ":decorator:latest.integration"
+        compile ":user-tag:0.6"
 
         compile "grails.crm:crm-core:latest.integration"
         compile "grails.crm:crm-contact:latest.integration"
-        runtime "grails.crm:crm-security:latest.integration"
-        runtime "grails.crm:crm-tags:latest.integration"
-        runtime "grails.crm:crm-feature:latest.integration"
-        runtime "grails.crm:crm-ui-bootstrap:latest.integration"
+        compile "grails.crm:crm-security:latest.integration"
+        compile "grails.crm:crm-tags:latest.integration"
+        compile "grails.crm:crm-feature:latest.integration"
+        compile "grails.crm:crm-ui-bootstrap:latest.integration"
     }
 }
 
