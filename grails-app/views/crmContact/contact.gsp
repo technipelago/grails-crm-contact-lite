@@ -10,12 +10,16 @@
     $(document).ready(function() {
         $("input[name='title']").autocomplete("${createLink(action: 'autocompleteTitle', params:[max:20])}", {
             remoteDataType: 'json',
+            useCache: false,
+            filter: false,
             preventDefaultReturn: true,
             selectFirst: true
         });
 
         $("#parent").autocomplete("${createLink(action: 'autocompleteCompany', params:[max:20])}", {
         remoteDataType: 'json',
+        useCache: false,
+        filter: false,
         preventDefaultReturn: true,
         selectFirst: true,
         onItemSelect: function(item) {

@@ -12,6 +12,8 @@
             var $newInput = $('<input type="text" name="category" value="" class="crm-category span11" autocomplete="off"/>');
             $newInput.autocomplete("${createLink(action: 'autocompleteCategoryType', params: [max: 20])}", {
                 remoteDataType: 'json',
+                useCache: false,
+                filter: false,
                 preventDefaultReturn: true,
                 selectFirst: true
             });
@@ -22,6 +24,8 @@
         $(document).ready(function() {
             $("input.crm-category").autocomplete("${createLink(action: 'autocompleteCategoryType', params: [max: 20])}", {
                 remoteDataType: 'json',
+                useCache: false,
+                filter: false,
                 preventDefaultReturn: true,
                 selectFirst: true
             });
