@@ -18,7 +18,7 @@ import grails.plugins.crm.contact.CrmContact
 
 class CrmContactLiteGrailsPlugin {
     def groupId = "grails.crm"
-    def version = "1.2.5"
+    def version = "1.2.6"
     def grailsVersion = "2.2 > *"
     def dependsOn = [:]
     def loadAfter = ['crmContact']
@@ -30,7 +30,7 @@ class CrmContactLiteGrailsPlugin {
     def author = "Goran Ehrsson"
     def authorEmail = "goran@technipelago.se"
     def description = '''
-Provides simple contact management features for GR8 CRM.
+Provides simple but powerful contact management features for GR8 CRM applications.
 '''
     def documentation = "https://github.com/goeh/grails-crm-contact-lite"
     def license = "APACHE"
