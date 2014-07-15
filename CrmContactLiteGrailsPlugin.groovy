@@ -35,8 +35,8 @@ Provides simple but powerful contact management features for GR8 CRM application
     def documentation = "https://github.com/goeh/grails-crm-contact-lite"
     def license = "APACHE"
     def organization = [name: "Technipelago AB", url: "http://www.technipelago.se/"]
-    def issueManagement = [system: "github", url: "https://github.com/goeh/grails-crm-contact-lite/issues"]
-    def scm = [url: "https://github.com/goeh/grails-crm-contact-lite"]
+    def issueManagement = [system: "github", url: "https://github.com/technipelago/grails-crm-contact-lite/issues"]
+    def scm = [url: "https://github.com/technipelago/grails-crm-contact-lite"]
 
     def features = {
         crmContact {
