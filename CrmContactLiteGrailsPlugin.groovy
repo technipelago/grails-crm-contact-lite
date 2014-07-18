@@ -18,13 +18,13 @@ import grails.plugins.crm.contact.CrmContact
 
 class CrmContactLiteGrailsPlugin {
     def groupId = "grails.crm"
-    def version = "1.2.6"
+    def version = "1.3.0"
     def grailsVersion = "2.2 > *"
     def dependsOn = [:]
     def loadAfter = ['crmContact']
     def pluginExcludes = [
             "grails-app/views/error.gsp",
-            "src/groovy/grails/plugins/crm/contact/TestSecurityDelegate.groovy"
+            "src/groovy/grails/plugins/crm/contact/ContactLiteTestSecurityDelegate.groovy"
     ]
     def title = "GR8 CRM Contact Management (Lite)"
     def author = "Goran Ehrsson"

@@ -1,7 +1,6 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-grails.project.work.dir = "target"
 grails.project.target.level = 1.6
 
 grails.project.repos.default = "crm"
@@ -12,8 +11,8 @@ grails.project.dependency.resolution = {
     legacyResolve false
     repositories {
         grailsHome()
-        mavenRepo "http://labs.technipelago.se/repo/plugins-releases-local/"
         grailsCentral()
+        mavenRepo "http://labs.technipelago.se/repo/plugins-releases-local/"
         mavenRepo "http://labs.technipelago.se/repo/crm-releases-local/"
         mavenCentral()
     }
@@ -49,44 +48,15 @@ grails.project.dependency.resolution = {
         compile ":selection:0.9.6"
         compile ":sequence-generator:1.0"
         compile ":selection-repository:0.9.3"
-        compile ":recent-domain:latest.integration"
-        compile ":decorator:latest.integration"
+        compile ":recent-domain:0.6.0"
+        compile ":decorator:1.1"
         compile ":user-tag:0.6"
 
-        compile "grails.crm:crm-core:latest.integration"
-        compile "grails.crm:crm-contact:latest.integration"
-        compile "grails.crm:crm-security:latest.integration"
-        compile "grails.crm:crm-tags:latest.integration"
-        compile "grails.crm:crm-feature:latest.integration"
-        compile "grails.crm:crm-ui-bootstrap:latest.integration"
+        compile ":crm-core:2.0.0"
+        compile ":crm-contact:2.0.0"
+        compile ":crm-security:2.0.0"
+        compile ":crm-tags:2.0.0"
+        compile ":crm-feature:2.0.0"
+        compile ":crm-ui-bootstrap:2.0.0"
     }
-}
-
-codenarc {
-    reports = {
-        CrmXmlReport('xml') {
-            outputFile = 'target/CodeNarcReport.xml'
-            title = 'GR8 CRM CodeNarc Report'
-        }
-        CrmHtmlReport('html') {
-            outputFile = 'target/CodeNarcReport.html'
-            title = 'GR8 CRM CodeNarc Report'
-
-        }
-    }
-    properties = {
-        GrailsPublicControllerMethod.enabled = false
-        CatchException.enabled = false
-        CatchThrowable.enabled = false
-        ThrowException.enabled = false
-        ThrowRuntimeException.enabled = false
-        GrailsStatelessService.enabled = false
-        GrailsStatelessService.ignoreFieldNames = "dataSource,scope,sessionFactory,transactional,*Service,messageSource,grailsApplication,applicationContext,expose"
-    }
-    processTestUnit = false
-    processTestIntegration = false
-}
-
-coverage {
-    exclusions = ['**/radar/**']
 }
