@@ -1,5 +1,7 @@
+import grails.plugins.crm.contact.ContactLiteTestSecurityDelegate
+
 // Beans used in integration tests.
 //
 beans = {
-    crmSecurityDelegate(grails.plugins.crm.contact.TestSecurityDelegate)
+    crmSecurityDelegate(ContactLiteTestSecurityDelegate)
 }
