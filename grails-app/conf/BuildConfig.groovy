@@ -42,15 +42,15 @@ grails.project.dependency.resolution = {
 
         compile(":qrcode:0.6")
         compile(":rendering:0.4.4")
-        compile ":selection:0.9.6"
+        compile ":selection:0.9.7"
         compile ":sequence-generator:1.0"
         compile ":selection-repository:0.9.3"
         compile ":recent-domain:0.6.0"
         compile ":decorator:1.1"
         compile ":user-tag:0.6"
 
-        compile ":crm-core:2.0.0"
-        compile ":crm-contact:2.0.0"
+        compile ":crm-core:2.0.1"
+        compile ":crm-contact:2.0.2"
         compile ":crm-security:2.0.0"
         compile ":crm-tags:2.0.0"
         compile ":crm-feature:2.0.0"
