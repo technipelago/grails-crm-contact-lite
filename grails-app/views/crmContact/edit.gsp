@@ -81,7 +81,7 @@
     </g:if>
 
     <h1><g:message code="crmContact.edit.title"
-                   args="[entityName, crmContact]"/> <small>${crmContact.parent?.encodeAsHTML()}</small></h1>
+                   args="[entityName, crmContact]"/> <small>${crmContact.primaryContact?.encodeAsHTML()}</small></h1>
 
 </header>
 
@@ -208,7 +208,7 @@
             <g:each in="${addressTypes}" var="addressType" status="i">
                 <div class="tab-pane" id="${addressType.param ?: 'a' + addressType.id}">
                     <g:set var="parentAddr"
-                           value="${crmContact.parent?.addresses?.find { it.type == addressType }}"/>
+                           value="${crmContact.primaryContact?.addresses?.find { it.type == addressType }}"/>
                     <g:set var="myAddr" value="${crmContact.addresses?.find { it.type == addressType }}"/>
                     <div class="row-fluid">
                         <div class="span6">
@@ -226,7 +226,7 @@
 
                         <g:if test="${parentAddr}">
                             <div class="span6">
-                                <p><g:message code="crmContact.address.parent.label" default="{0} via {1}" args="${[addressType, crmContact.parent]}"/></p>
+                                <p><g:message code="crmContact.address.parent.label" default="{0} via {1}" args="${[addressType, crmContact.primaryContact]}"/></p>
                                 <g:render template="address"
                                           model="${[bean: parentAddr, row: i, prefix: 'parent', disabled: true]}"/>
                             </div>

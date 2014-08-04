@@ -70,6 +70,11 @@ Provides simple but powerful contact management features for GR8 CRM application
     }
 
     def doWithApplicationContext = { applicationContext ->
+
+        // Make CrmContact#getPrimaryContact() return the parent relation
+        // instead of finding it via the primary CrmContactRelation.
+        CrmContact.metaClass.getPrimaryContact={ -> delegate.parent }
+
         // Add a i18n admin page for this plugin's labels and messages.
         def crmPluginService = applicationContext.crmPluginService
         crmPluginService.registerView('crmMessage', 'index', 'tabs',
