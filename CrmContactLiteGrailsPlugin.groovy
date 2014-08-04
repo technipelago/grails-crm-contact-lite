@@ -31,6 +31,7 @@ class CrmContactLiteGrailsPlugin {
     def authorEmail = "goran@technipelago.se"
     def description = '''
 Provides simple but powerful contact management features for GR8 CRM applications.
+The plugin crm-contact-ui provides more sophisticated contact-contact relations.
 '''
     def documentation = "https://github.com/goeh/grails-crm-contact-lite"
     def license = "APACHE"
