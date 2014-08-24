@@ -29,28 +29,6 @@ class CrmContactController {
 
     static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], find: 'POST', delete: 'POST']
 
-    static navigation = [
-            [group: 'crmContact',
-                    order: 10,
-                    title: 'crmContact.edit',
-                    action: 'edit',
-                    isVisible: { actionName == 'show' },
-                    id: { params.id }
-            ],
-            [group: 'crmContact',
-                    order: 20,
-                    title: 'crmContact.create',
-                    action: 'create',
-                    isVisible: { actionName != 'create' }
-            ],
-            [group: 'crmContact',
-                    order: 30,
-                    title: 'crmContact.find',
-                    action: 'index',
-                    isVisible: { actionName != 'index' }
-            ]
-    ]
-
     def crmContactService
     def crmTagService
     def crmSecurityService
@@ -103,58 +81,39 @@ class CrmContactController {
         redirect(action: 'index')
     }
 
-    def print() {
-        def user = crmSecurityService.currentUser
-        try {
-            def tempFile = event(for: "crmContact", topic: "print", data: params + [report: 'list', user: user, tenant: TenantUtils.tenant]).waitFor(60000)?.value
-            if (tempFile instanceof File) {
-                try {
-                    def filename = message(code: 'crmContact.label', default: 'Contact') + '.pdf'
-                    WebUtils.inlineHeaders(response, "application/pdf", filename)
-                    WebUtils.renderFile(response, tempFile)
-                } finally {
-                    tempFile.delete()
-                }
-                return null // Success
-            } else if (tempFile) {
-                log.error("Print event returned an unexpected value: $tempFile (${tempFile.class.name})")
-                flash.error = message(code: 'crmContact.print.error.message', default: 'Printing failed due to an error', args: [tempFile.class.name])
-            } else {
-                flash.warning = message(code: 'crmContact.print.nothing.message', default: 'Nothing was printed')
-            }
-        } catch (TimeoutException te) {
-            flash.error = message(code: 'crmContact.print.timeout.message', default: 'Printing did not complete')
-        } catch (Exception e) {
-            log.error("Print event throwed an exception", e)
-            flash.error = message(code: 'crmContact.print.error.message', default: 'Printing failed due to an error', args: [e.message])
-        }
-        redirect(action: "index") // error condition, return to search form.
-    }
-
     def export() {
-        def user = crmSecurityService.getUserInfo(crmSecurityService.currentUser?.username)
-        def filename = message(code: 'crmContact.label', default: 'Contact')
-        try {
-            def result = event(for: "crmContact", topic: "export",
-                    data: params + [user: user, tenant: TenantUtils.tenant, locale: request.locale, filename: filename]).waitFor(60000)?.value
-            if (result?.file) {
-                try {
-                    WebUtils.inlineHeaders(response, result.contentType ?: "application/vnd.ms-excel", result.filename ?: filename)
-                    WebUtils.renderFile(response, result.file)
-                } finally {
-                    result.file.delete()
+        def user = crmSecurityService.getUserInfo()
+        def namespace = params.namespace ?: 'crmContact'
+        if (request.post) {
+            def filename = message(code: 'crmContact.label', default: 'Contact')
+            try {
+                def topic = params.topic ?: 'export'
+                def result = event(for: namespace, topic: topic,
+                        data: params + [user: user, tenant: TenantUtils.tenant, locale: request.locale, filename: filename]).waitFor(60000)?.value
+                if (result?.file) {
+                    try {
+                        WebUtils.inlineHeaders(response, result.contentType, result.filename ?: namespace)
+                        WebUtils.renderFile(response, result.file)
+                    } finally {
+                        result.file.delete()
+                    }
+                    return null // Success
+                } else {
+                    flash.warning = message(code: 'crmContact.export.nothing.message', default: 'Nothing was exported')
                 }
-                return null // Success
-            } else {
-                flash.warning = message(code: 'crmContact.export.nothing.message', default: 'Nothing was exported')
+            } catch (TimeoutException te) {
+                flash.error = message(code: 'crmContact.export.timeout.message', default: 'Export did not complete')
+            } catch (Exception e) {
+                log.error("Export event throwed an exception", e)
+                flash.error = message(code: 'crmContact.export.error.message', default: 'Export failed due to an error', args: [e.message])
             }
-        } catch (TimeoutException te) {
-            flash.error = message(code: 'crmContact.export.timeout.message', default: 'Export did not complete')
-        } catch (Exception e) {
-            log.error("Export event throwed an exception", e)
-            flash.error = message(code: 'crmContact.export.error.message', default: 'Export failed due to an error', args: [e.message])
+            redirect(action: "index")
+        } else {
+            def uri = params.getSelectionURI()
+            def layouts = event(for: namespace, topic: (params.topic ?: 'exportLayout'),
+                    data: [tenant: TenantUtils.tenant, username: user.username, uri: uri]).waitFor(10000)?.values?.flatten()
+            [layouts: layouts, selection: uri]
         }
-        redirect(action: "index")
     }
 
     def create() {
