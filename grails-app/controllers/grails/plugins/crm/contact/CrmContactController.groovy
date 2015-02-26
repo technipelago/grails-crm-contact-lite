@@ -594,13 +594,13 @@ class CrmContactController {
     }
 
     def autocompleteTitle() {
-        def result = listDistinctTitle(params.term)
+        def result = listDistinctTitle(params.q)
         WebUtils.defaultCache(response)
         render result as JSON
     }
 
     def autocompleteCategoryType() {
-        def result = crmContactService.listCategoryType(params.remove('term'), params).collect { it.toString() }
+        def result = crmContactService.listCategoryType(params.remove('q'), params).collect { it.toString() }
         WebUtils.defaultCache(response)
         render result as JSON
     }
