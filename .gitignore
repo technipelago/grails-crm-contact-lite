@@ -1,5 +1,5 @@
 # Ignore Intellij IDEA files
-/.idea
+.idea
 /*.iml
 /cobertura.ser
 /.gradle
