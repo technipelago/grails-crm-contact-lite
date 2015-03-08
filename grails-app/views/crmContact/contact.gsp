@@ -116,7 +116,7 @@
                         <div class="span4">
                             <g:unless test="${crmContact.parent}">
                                 <f:field property="parent" label="crmContact.parent.label">
-                                    <input type="text" name="parentName" id="parent"
+                                    <g:textField name="parentName" id="parent"
                                            value="${crmContact.parent?.name}"
                                            class="span11" autocomplete="off"/>
                                 </f:field>
@@ -137,7 +137,7 @@
 
                         <div class="span4">
                             <f:field property="number">
-                                <input type="text" name="number" id="number" value="${crmContact.number}"
+                                <g:textField name="number" value="${crmContact.number}"
                                        novalidate="" autocomplete="off" class="input-medium"/>
                             </f:field>
                             <f:field property="ssn" label="crmPerson.ssn.label" input-class="input-medium"/>
