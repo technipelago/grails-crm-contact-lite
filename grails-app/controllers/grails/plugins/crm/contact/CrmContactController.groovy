@@ -157,12 +157,8 @@ class CrmContactController {
                 return [user: user, crmContact: crmContact, addressTypes: addressTypes, userList: userList, referer: params.referer]
             case 'POST':
                 bindCategories(crmContact, params.list('category').findAll { it.trim() })
-                for (a in crmContact.addresses.findAll { it.empty }) {
-                    crmContact.removeFromAddresses(a)
-                    if (a.id) {
-                        a.delete()
-                    }
-                }
+                bindAddresses(crmContact, params)
+
                 if (!crmContact.save()) {
                     def addressTypes = CrmAddressType.findAllByTenantIdAndEnabled(tenant, true)
                     render(view: 'company', model: [user: user, crmContact: crmContact,
@@ -202,32 +198,23 @@ class CrmContactController {
                 def problem = null
                 if (params.parentName && !parentContact) {
                     parentContact = new CrmContact()
-                    bindData(parentContact, params, [include: ['telephone', 'addresses']])
+                    bindData(parentContact, params, [include: ['telephone']])
                     parentContact.name = params.parentName
                     parentContact.tenantId = tenant
-                    for (a in parentContact.addresses.findAll { it.empty }) {
-                        parentContact.removeFromAddresses(a)
-                        if (a.id) {
-                            a.delete()
-                        }
-                    }
+                    bindAddresses(parentContact, params)
+
                     // If we don't create a person, put the description on the company.
                     if(! createPerson) {
                         parentContact.description = params.description
                     }
-                        if (parentContact.save()) {
+                    if (parentContact.save()) {
                         crmContact.parent = parentContact
                         crmContact.addresses?.clear()
                     } else {
                         problem = parentContact
                     }
                 } else {
-                    for (a in crmContact.addresses?.findAll { it.empty }) {
-                        crmContact.removeFromAddresses(a)
-                        if (a.id) {
-                            a.delete()
-                        }
-                    }
+                    bindAddresses(crmContact, params)
                 }
 
                 // If no username is specified, copy username from parent contact.
@@ -287,12 +274,8 @@ class CrmContactController {
                 return [user: user, crmContact: crmContact, addressTypes: addressTypes,
                         userList: userList, referer: params.referer]
             case 'POST':
-                for (a in crmContact.addresses.findAll { it.empty }) {
-                    crmContact.removeFromAddresses(a)
-                    if (a.id) {
-                        a.delete()
-                    }
-                }
+                bindAddresses(crmContact, params)
+
                 if (!crmContact.save()) {
                     render(view: 'person', model: [user: user, crmContact: crmContact,
                             addressTypes: crmContact.addresses*.type, userList: userList, referer: params.referer])
