@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
             excludes 'xercesImpl', 'xml-apis'
         }
 
-        compile(":qrcode:0.6")
+        compile(":qrcode:0.7")
         compile(":rendering:1.0.0")
         compile ":selection:0.9.8"
         compile ":sequence-generator:1.1"
