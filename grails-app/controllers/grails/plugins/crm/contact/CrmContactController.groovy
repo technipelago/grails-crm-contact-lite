@@ -468,9 +468,13 @@ class CrmContactController {
             crmContact.firstName = crmContact.name
             crmContact.name = null
             // Remove all categories.
-            for (c in crmContact.categories.clone()) {
-                crmContact.removeFromCategories(c)
-                c.delete()
+            if(crmContact.categories) {
+                List tmp = []
+                tmp.addAll(crmContact.categories)
+                for (c in tmp) {
+                    crmContact.removeFromCategories(c)
+                    c.delete()
+                }
             }
         } else {
             crmContact.firstName = null
