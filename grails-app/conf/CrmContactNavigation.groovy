@@ -1,9 +1,9 @@
 navigation = {
     main(global: true) {
-        crmContact controller: 'crmContact', action: 'index', order: 10, data: [icon: 'person']
+        crmContact controller: 'crmContact', action: 'index', order: 10
     }
     admin(global: true) {
-        crmAddressType controller: 'crmAddressType', action: 'index', order: 110, data: [icon: 'envelope']
-        crmContactCategoryType controller: 'crmContactCategoryType', action: 'index', order: 120, data: [icon: 'person']
+        crmAddressType controller: 'crmAddressType', action: 'index', order: 110
+        crmContactCategoryType controller: 'crmContactCategoryType', action: 'index', order: 120
     }
 }
