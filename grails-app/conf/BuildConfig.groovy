@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
         compile(":qrcode:0.7")
         compile(":rendering:1.0.0")
         compile ":selection:0.9.8"
-        compile ":sequence-generator:1.1"
+        compile ":sequence-generator:1.2"
         compile ":selection-repository:0.9.3"
         compile ":recent-domain:0.6.0"
         compile ":decorator:1.1"
@@ -59,6 +59,6 @@ grails.project.dependency.resolution = {
 
         compile ":crm-contact:2.4.1"
         compile ":crm-feature:2.4.1"
-        compile ":crm-ui-bootstrap:2.4.0"
+        compile ":crm-ui-bootstrap:2.4.1"
     }
 }
