@@ -83,6 +83,14 @@ A simple but powerful address book integration!
 iOS does not have built-in support for scanning QRCode images, but you can download scanner apps from App Store.
 ====
 
+== Changes
+
+1.4.4:: Set config `crm.contact.navigation.index` to 0 (zero) to disable auto adding item to main navigation.
+1.4.3:: Renamed namespace parameter to 'ns' in export() to make plugin compatible with Grails 2.5.
+1.4.2:: Export/print fixes.
+1.4.1:: Fix for CloneNotSupportedException when changing contact type with categories.
+1.4.0:: Migrated from navigation plugin to platform-core navigation support.
+
 == License
 
 {license}
