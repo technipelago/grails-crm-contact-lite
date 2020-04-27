@@ -78,13 +78,9 @@ image::crm-contact-vcard.png[vCard as QRCode image, role="thumb"]
 
 A simple but powerful address book integration!
 
-[NOTE]
-====
-iOS does not have built-in support for scanning QRCode images, but you can download scanner apps from App Store.
-====
-
 == Changes
 
+1.4.5:: Adds Google API version 3 to Map URL
 1.4.4:: Set config `crm.contact.navigation.index` to 0 (zero) to disable auto adding item to main navigation.
 1.4.3:: Renamed namespace parameter to 'ns' in export() to make plugin compatible with Grails 2.5.
 1.4.2:: Export/print fixes.
